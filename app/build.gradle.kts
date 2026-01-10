@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.example.secondbeststoryever"
     compileSdk {
-        version = release(36)
+        version = release(36) // or your desired version
     }
 
     defaultConfig {
@@ -57,4 +57,8 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation(platform("androidx.compose:compose-bom:2023.01.00"))
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.0")
 }

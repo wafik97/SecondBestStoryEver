@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Second Best Story Ever</string>
+    <string name="poster">https://static.wikia.nocookie.net/ranger-reject-sentai/images/f/f5/Season_1_Cover.png/revision/latest?cb=20240305194156</string>
+    <string name="b1">Characters page</string>
+    <string name="b2">Lore Page</string>
+    <string name="b3">Pics Page</string>
+    <string name="b4">Map Page</string>
+
 </resources>
