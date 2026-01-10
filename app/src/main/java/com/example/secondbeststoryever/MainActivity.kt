@@ -22,7 +22,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.example.secondbeststoryever.ui.screens.Home
+import com.example.secondbeststoryever.ui.screens.characters.CharacterDetailsScreen
+import com.example.secondbeststoryever.ui.screens.characters.CharactersScreen
+import com.example.secondbeststoryever.ui.screens.characters.CharactersViewModel
 import com.example.secondbeststoryever.ui.theme.Dimens
 import com.example.secondbeststoryever.ui.theme.SecondBestStoryEverTheme
 
@@ -32,17 +40,34 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SecondBestStoryEverTheme {
-                   Home()
-
+                Scaffold { innerPadding ->
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = "home",
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        composable("home") { Home(navController) }
+                        composable("characters") { CharactersScreen(navController) }
+                        /*composable("character/{id}") { backStackEntry ->
+                            val characterId = backStackEntry.arguments?.getString("id")?.toInt() ?: 0
+                            val character = CharactersViewModel().characters.value.firstOrNull { it.id == characterId }
+                            if (character != null) {
+                                CharacterDetailsScreen(character)
+                            }
+                        }*/
+                    }
+                }
             }
         }
+
     }
 }
 
 
 
 @Composable
-fun Home(){
+fun Home(navController: NavController){
 
     Scaffold { innerPadding ->
 
@@ -67,7 +92,7 @@ fun Home(){
                 contentScale = ContentScale.Fit
             )
 
-            val buttons = listOf(
+            /*val buttons = listOf(
                 R.string.b1,
                 R.string.b2,
                 R.string.b3,
@@ -84,6 +109,43 @@ fun Home(){
                         fontSize = Dimens.buttonFontSize
                     )
                 }
+            }*/
+
+            Button(
+                onClick = { navController.navigate("characters") },
+                modifier = Modifier.fillMaxWidth().height(Dimens.buttonHeight)
+            ) {
+                Text(
+                    stringResource(R.string.b1),
+                    fontSize = Dimens.buttonFontSize
+                )
+            }
+            Button(
+                onClick = { },
+                modifier = Modifier.fillMaxWidth().height(Dimens.buttonHeight)
+            ) {
+                Text(
+                    stringResource(R.string.b2),
+                    fontSize = Dimens.buttonFontSize
+                )
+            }
+            Button(
+                onClick = { },
+                modifier = Modifier.fillMaxWidth().height(Dimens.buttonHeight)
+            ) {
+                Text(
+                    stringResource(R.string.b3),
+                    fontSize = Dimens.buttonFontSize
+                )
+            }
+            Button(
+                onClick = { },
+                modifier = Modifier.fillMaxWidth().height(Dimens.buttonHeight)
+            ) {
+                Text(
+                    stringResource(R.string.b4),
+                    fontSize = Dimens.buttonFontSize
+                )
             }
 
         }
