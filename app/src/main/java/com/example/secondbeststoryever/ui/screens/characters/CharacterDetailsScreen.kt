@@ -1,50 +1,117 @@
 package com.example.secondbeststoryever.ui.screens.characters
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.secondbeststoryever.data.model.Character
+import com.example.secondbeststoryever.data.model.CharacterInfo
 import com.example.secondbeststoryever.data.remote.RetrofitInstance
+import com.example.secondbeststoryever.data.remote.mapper.toCharacter
 
 @Composable
 fun CharacterDetailsScreen(characterId: Int) {
- /*   val characterState = remember { mutableStateOf<Character?>(null) }
+
+    var character by remember { mutableStateOf<CharacterInfo?>(null) }
+    var isLoading by remember { mutableStateOf(true) }
+    var error by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(characterId) {
         try {
             val response = RetrofitInstance.api.getCharacter(characterId)
-            characterState.value = response.data.toCharacter()
+            character = response.character.toCharacter()
         } catch (e: Exception) {
-            e.printStackTrace()
+            error = e.localizedMessage
+        } finally {
+            isLoading = false
         }
     }
 
     Scaffold { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(16.dp)
-        ) {
-            characterState.value?.let { character ->
-                AsyncImage(
-                    model = character.imageUrl,
-                    contentDescription = character.name,
-                    modifier = Modifier.fillMaxWidth().height(250.dp),
-                    contentScale = ContentScale.Crop
+        when {
+            isLoading -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
+                    contentAlignment = androidx.compose.ui.Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+
+            error != null -> {
+                Text(
+                    text = error ?: "Unknown error",
+                    modifier = Modifier.padding(16.dp)
                 )
-                Text(text = character.name, style = MaterialTheme.typography.headlineMedium)
-                Text(text = character.role, style = MaterialTheme.typography.bodyMedium)
-                Text(text = character.about, style = MaterialTheme.typography.bodySmall)
-            } ?: Text("Loading...")
+            }
+
+            character != null -> {
+                CharacterContent(
+                    character = character!!,
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
         }
-    }*/
+    }
+}
+
+
+@Composable
+private fun CharacterContent(
+    character: CharacterInfo,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+
+        AsyncImage(
+            model = character.imageUrl,
+            contentDescription = character.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(280.dp),
+            contentScale = ContentScale.Crop
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = character.name,
+            style = MaterialTheme.typography.headlineMedium
+        )
+
+        character.nameKanji?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
+
+        if (character.nicknames.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Nicknames: ${character.nicknames.joinToString()}",
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        character.about?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+    }
 }

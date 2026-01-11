@@ -2,11 +2,11 @@ package com.example.secondbeststoryever.ui.screens.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.secondbeststoryever.data.dto.toCharacter
 import com.example.secondbeststoryever.data.model.Character
 import com.example.secondbeststoryever.data.remote.RetrofitInstance
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateOf
+import com.example.secondbeststoryever.data.remote.mapper.toCharacter
 
 class CharactersViewModel : ViewModel() {
 

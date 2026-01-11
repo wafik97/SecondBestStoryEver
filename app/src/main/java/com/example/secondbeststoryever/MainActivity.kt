@@ -49,13 +49,12 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable("home") { Home(navController) }
                         composable("characters") { CharactersScreen(navController) }
-                        /*composable("character/{id}") { backStackEntry ->
-                            val characterId = backStackEntry.arguments?.getString("id")?.toInt() ?: 0
-                            val character = CharactersViewModel().characters.value.firstOrNull { it.id == characterId }
-                            if (character != null) {
-                                CharacterDetailsScreen(character)
-                            }
-                        }*/
+                        composable("character/{id}") { backStackEntry ->
+                            val characterId =
+                                backStackEntry.arguments?.getString("id")?.toInt() ?: 0
+
+                            CharacterDetailsScreen(characterId)
+                        }
                     }
                 }
             }

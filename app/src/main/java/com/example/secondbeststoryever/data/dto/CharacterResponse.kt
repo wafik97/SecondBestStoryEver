@@ -30,8 +30,8 @@ data class CharacterDto(
 
 
 data class CharacterImagesDto(
-    val jpg: ImageDto,
-    val webp: ImageDto
+    val jpg: ImageDto?,
+    val webp: ImageDto?
 )
 
 
@@ -40,11 +40,11 @@ data class ImageDto(
     val imageUrl: String
 )
 
-fun CharacterItemDto.toCharacter(): com.example.secondbeststoryever.data.model.Character {
-    return Character(
-        id = character.id,
-        name = character.name,
-        imageUrl = character.images.jpg.imageUrl,
-        role = role
-    )
-}
+//fun CharacterItemDto.toCharacter(): com.example.secondbeststoryever.data.model.Character {
+//    return Character(
+//        id = character.id,
+//        name = character.name,
+//        imageUrl = character.images.jpg.imageUrl,
+//        role = role
+//    )
+//}
