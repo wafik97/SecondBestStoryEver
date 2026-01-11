@@ -31,6 +31,7 @@ import com.example.secondbeststoryever.ui.screens.Home
 import com.example.secondbeststoryever.ui.screens.characters.CharacterDetailsScreen
 import com.example.secondbeststoryever.ui.screens.characters.CharactersScreen
 import com.example.secondbeststoryever.ui.screens.characters.CharactersViewModel
+import com.example.secondbeststoryever.ui.screens.lore.LoreScreen
 import com.example.secondbeststoryever.ui.theme.Dimens
 import com.example.secondbeststoryever.ui.theme.SecondBestStoryEverTheme
 
@@ -55,6 +56,7 @@ class MainActivity : ComponentActivity() {
 
                             CharacterDetailsScreen(characterId)
                         }
+                        composable("lore") { LoreScreen() }
                     }
                 }
             }
@@ -120,7 +122,8 @@ fun Home(navController: NavController){
                 )
             }
             Button(
-                onClick = { },
+                onClick = { navController.navigate("lore")
+                },
                 modifier = Modifier.fillMaxWidth().height(Dimens.buttonHeight)
             ) {
                 Text(
