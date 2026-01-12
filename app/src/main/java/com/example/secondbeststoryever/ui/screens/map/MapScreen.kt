@@ -1,16 +1,41 @@
 package com.example.secondbeststoryever.ui.screens.map
 
+import MapViewModel
+import android.Manifest
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun MapScreen(viewModel: MapViewModel = viewModel()) {
+    val context = LocalContext.current
     val allUsers by viewModel.users.collectAsState()
+
     var nameInput by remember { mutableStateOf("") }
+
+    // Launcher for requesting location permission
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            // Permission granted, start WebSocket & location updates
+            viewModel.setName(nameInput)
+            viewModel.connect()
+        } else {
+            Toast.makeText(
+                context,
+                "Location permission is required",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -29,8 +54,8 @@ fun MapScreen(viewModel: MapViewModel = viewModel()) {
         Button(
             onClick = {
                 if (nameInput.isNotBlank()) {
-                    viewModel.setName(nameInput)
-                    viewModel.connect()
+                    // Request location permission on click
+                    locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                 }
             },
             enabled = nameInput.isNotBlank(),
