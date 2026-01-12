@@ -1,5 +1,6 @@
 package com.example.secondbeststoryever
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -32,6 +33,9 @@ import com.example.secondbeststoryever.ui.screens.characters.CharacterDetailsScr
 import com.example.secondbeststoryever.ui.screens.characters.CharactersScreen
 import com.example.secondbeststoryever.ui.screens.characters.CharactersViewModel
 import com.example.secondbeststoryever.ui.screens.lore.LoreScreen
+import com.example.secondbeststoryever.ui.screens.map.MapScreen
+import com.example.secondbeststoryever.ui.screens.map.dummyUsers
+import com.example.secondbeststoryever.ui.screens.pictures.PicturesScreen
 import com.example.secondbeststoryever.ui.theme.Dimens
 import com.example.secondbeststoryever.ui.theme.SecondBestStoryEverTheme
 
@@ -41,6 +45,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SecondBestStoryEverTheme {
+
                 Scaffold { innerPadding ->
                     val navController = rememberNavController()
                     NavHost(
@@ -57,6 +62,13 @@ class MainActivity : ComponentActivity() {
                             CharacterDetailsScreen(characterId)
                         }
                         composable("lore") { LoreScreen() }
+                        composable("pictures") { PicturesScreen() }
+                        composable("map") {
+                            MapScreen(context = this@MainActivity, userLocations = dummyUsers)
+                        }
+
+
+
                     }
                 }
             }
@@ -132,7 +144,7 @@ fun Home(navController: NavController){
                 )
             }
             Button(
-                onClick = { },
+                onClick = { navController.navigate("pictures")},
                 modifier = Modifier.fillMaxWidth().height(Dimens.buttonHeight)
             ) {
                 Text(
@@ -141,7 +153,7 @@ fun Home(navController: NavController){
                 )
             }
             Button(
-                onClick = { },
+                onClick = { navController.navigate("map") },
                 modifier = Modifier.fillMaxWidth().height(Dimens.buttonHeight)
             ) {
                 Text(

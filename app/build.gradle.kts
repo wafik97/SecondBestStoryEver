@@ -71,7 +71,17 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.7.3")
 
+    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha05")
 
+    implementation("com.google.maps.android:maps-compose:2.13.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    implementation("com.google.accompanist:accompanist-permissions:0.30.1")
+
+    implementation("org.osmdroid:osmdroid-android:6.1.16")
+    implementation("org.osmdroid:osmdroid-mapsforge:6.1.16")
 
 
 }
