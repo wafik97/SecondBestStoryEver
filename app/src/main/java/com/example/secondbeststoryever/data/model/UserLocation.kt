@@ -5,5 +5,5 @@ data class UserLocation(
     val name: String,
     val lat: Double,
     val lon: Double,
-    val color: Int
+
 )

@@ -84,4 +84,7 @@ dependencies {
     implementation("org.osmdroid:osmdroid-mapsforge:6.1.16")
 
 
+    implementation("org.java-websocket:Java-WebSocket:1.5.3")
+
+
 }

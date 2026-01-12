@@ -34,7 +34,6 @@ import com.example.secondbeststoryever.ui.screens.characters.CharactersScreen
 import com.example.secondbeststoryever.ui.screens.characters.CharactersViewModel
 import com.example.secondbeststoryever.ui.screens.lore.LoreScreen
 import com.example.secondbeststoryever.ui.screens.map.MapScreen
-import com.example.secondbeststoryever.ui.screens.map.dummyUsers
 import com.example.secondbeststoryever.ui.screens.pictures.PicturesScreen
 import com.example.secondbeststoryever.ui.theme.Dimens
 import com.example.secondbeststoryever.ui.theme.SecondBestStoryEverTheme
@@ -63,9 +62,8 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("lore") { LoreScreen() }
                         composable("pictures") { PicturesScreen() }
-                        composable("map") {
-                            MapScreen(context = this@MainActivity, userLocations = dummyUsers)
-                        }
+                        composable("map") { MapScreen() }
+
 
 
 
