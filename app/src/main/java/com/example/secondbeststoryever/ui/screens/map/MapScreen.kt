@@ -21,21 +21,25 @@ fun MapScreen(viewModel: MapViewModel = viewModel()) {
     var nameInput by remember { mutableStateOf("") }
 
     // Launcher for requesting location permission
-    val locationPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (isGranted) {
-            // Permission granted, start WebSocket & location updates
-            viewModel.setName(nameInput)
-            viewModel.connect()
-        } else {
-            Toast.makeText(
-                context,
-                "Location permission is required",
-                Toast.LENGTH_SHORT
-            ).show()
+    val locationPermissionLauncher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            val granted =
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+                        permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+
+            if (granted) {
+                viewModel.connect()
+            } else {
+                Toast.makeText(
+                    context,
+                    "Location permission is required",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
-    }
+
 
     Column(
         modifier = Modifier
@@ -54,8 +58,14 @@ fun MapScreen(viewModel: MapViewModel = viewModel()) {
         Button(
             onClick = {
                 if (nameInput.isNotBlank()) {
-                    // Request location permission on click
-                    locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                    viewModel.setName(nameInput) // ✅ set name ONCE here
+
+                    locationPermissionLauncher.launch(
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+                    )
                 }
             },
             enabled = nameInput.isNotBlank(),
@@ -63,6 +73,7 @@ fun MapScreen(viewModel: MapViewModel = viewModel()) {
         ) {
             Text("Connect")
         }
+
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -73,7 +84,7 @@ fun MapScreen(viewModel: MapViewModel = viewModel()) {
             Text("Longitude: ${current.lon}")
 
             Spacer(modifier = Modifier.height(16.dp))
-            Divider()
+            HorizontalDivider()
             Spacer(modifier = Modifier.height(16.dp))
         }
 
@@ -87,7 +98,7 @@ fun MapScreen(viewModel: MapViewModel = viewModel()) {
                 Text("Longitude: ${user.lon}")
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Divider()
+                HorizontalDivider()
                 Spacer(modifier = Modifier.height(12.dp))
             }
         } else {
