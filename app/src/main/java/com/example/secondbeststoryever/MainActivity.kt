@@ -45,12 +45,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             SecondBestStoryEverTheme {
 
-                Scaffold { innerPadding ->
+                Scaffold { banana ->
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
                         startDestination = "home",
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(banana)
                     ) {
                         composable("home") { Home(navController) }
                         composable("characters") { CharactersScreen(navController) }
@@ -78,10 +78,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Home(navController: NavController){
 
-    Scaffold { innerPadding ->
+    Scaffold { banana ->
 
         Column(
-            modifier = Modifier.fillMaxSize().padding(innerPadding).padding(Dimens.screenPadding).verticalScroll(rememberScrollState()),
+            modifier = Modifier.fillMaxSize().padding(banana).padding(Dimens.screenPadding).verticalScroll(rememberScrollState()),
 
             verticalArrangement = Arrangement.spacedBy(Dimens.elementSpacing),
             horizontalAlignment = Alignment.CenterHorizontally
