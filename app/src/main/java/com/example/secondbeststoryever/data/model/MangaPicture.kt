@@ -9,6 +9,6 @@ data class MangaPicture(
 
 fun MangaPictureDto.toPicture(): MangaPicture {
     return MangaPicture(
-        imageUrl = jpg.imageUrl // choose JPG for simplicity
+        imageUrl = jpg.imageUrl
     )
 }

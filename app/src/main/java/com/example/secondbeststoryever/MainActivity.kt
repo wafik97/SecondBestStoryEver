@@ -55,10 +55,8 @@ class MainActivity : ComponentActivity() {
                         composable("home") { Home(navController) }
                         composable("characters") { CharactersScreen(navController) }
                         composable("character/{id}") { backStackEntry ->
-                            val characterId =
-                                backStackEntry.arguments?.getString("id")?.toInt() ?: 0
-
-                            CharacterDetailsScreen(characterId)
+                            val characterId = backStackEntry.arguments?.getString("id")?.toInt() ?: 0
+                             CharacterDetailsScreen(characterId)
                         }
                         composable("lore") { LoreScreen() }
                         composable("pictures") { PicturesScreen() }
@@ -99,7 +97,7 @@ fun Home(navController: NavController){
                 model = stringResource(R.string.poster),
                 contentDescription = "Manga Poster",
                 modifier = Modifier
-                    .fillMaxWidth(0.6f),
+                    .fillMaxWidth(0.55f),
                 contentScale = ContentScale.Fit
             )
 
