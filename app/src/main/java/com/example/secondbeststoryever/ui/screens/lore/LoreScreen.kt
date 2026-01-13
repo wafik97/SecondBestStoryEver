@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.secondbeststoryever.data.model.MangaLore
+import com.example.secondbeststoryever.ui.theme.Dimens
 
 
 @Composable
@@ -33,7 +34,7 @@ fun LoreScreen(
     mangaId: Int = 132129,
     viewModel: LoreViewModel = viewModel()
 ) {
-    LaunchedEffect(Unit) {  // and this
+    LaunchedEffect(Unit) {  // and this don't forget
         viewModel.loadLore(mangaId)
     }
 
@@ -57,8 +58,8 @@ fun LoreContent(lore: MangaLore) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(Dimens.mediumSpacing),
+        verticalArrangement = Arrangement.spacedBy(Dimens.mediumSpacing)
     ) {
 
         item {
@@ -67,7 +68,7 @@ fun LoreContent(lore: MangaLore) {
                 contentDescription = lore.title,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(260.dp),
+                    .height(Dimens.bigPosterImageSize),
                 contentScale = ContentScale.Crop
             )
         }
@@ -92,14 +93,16 @@ fun LoreContent(lore: MangaLore) {
         item {
             ExpandableSection(
                 title = "Synopsis",
-                content = lore.synopsis
+                content = lore.synopsis,
+                toExpand = true
             )
         }
 
         item {
             ExpandableSection(
                 title = "Background",
-                content = lore.background
+                content = lore.background,
+                toExpand = false
             )
         }
 
@@ -115,7 +118,8 @@ fun LoreContent(lore: MangaLore) {
 @Composable
 fun ExpandableSection(
     title: String,
-    content: String
+    content: String,
+    toExpand : Boolean
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -132,13 +136,15 @@ fun ExpandableSection(
             overflow = TextOverflow.Ellipsis
         )
 
-        Text(
-            text = if (expanded) "Show less" else "Read more",
-            modifier = Modifier
-                .padding(top = 4.dp)
-                .clickable { expanded = !expanded },
-            color = MaterialTheme.colorScheme.primary
-        )
+        if(toExpand) {
+            Text(
+                text = if (expanded) "Show less" else "Read more",
+                modifier = Modifier
+                    .padding(top = 4.dp)
+                    .clickable { expanded = !expanded },
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
     }
 }
 

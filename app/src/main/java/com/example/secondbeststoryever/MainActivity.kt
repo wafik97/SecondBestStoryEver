@@ -99,7 +99,7 @@ fun Home(navController: NavController){
                 model = stringResource(R.string.poster),
                 contentDescription = "Manga Poster",
                 modifier = Modifier
-                    .fillMaxWidth(0.7f),
+                    .fillMaxWidth(0.6f),
                 contentScale = ContentScale.Fit
             )
 
@@ -169,6 +169,7 @@ fun Home(navController: NavController){
 @Composable
 fun GreetingPreview() {
     SecondBestStoryEverTheme {
-        Home()
+        val navController = rememberNavController()
+        Home(navController)
     }
 }

@@ -15,9 +15,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.example.secondbeststoryever.ui.theme.Dimens
 
 @Composable
 fun PicturesScreen(
@@ -40,9 +40,9 @@ fun PicturesScreen(
             columns = GridCells.Fixed(2),
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                .padding(Dimens.smallSpacing),
+            verticalArrangement = Arrangement.spacedBy(Dimens.smallSpacing),
+            horizontalArrangement = Arrangement.spacedBy(Dimens.smallSpacing)
         ) {
             items(pictures) { picture ->
                 AsyncImage(
@@ -50,7 +50,7 @@ fun PicturesScreen(
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp),
+                        .height(Dimens.posterImageSize),
                     contentScale = ContentScale.Crop
                 )
             }

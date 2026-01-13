@@ -12,6 +12,7 @@ import coil.compose.AsyncImage
 import com.example.secondbeststoryever.data.model.CharacterInfo
 import com.example.secondbeststoryever.data.remote.RetrofitInstance
 import com.example.secondbeststoryever.data.remote.mapper.toCharacter
+import com.example.secondbeststoryever.ui.theme.Dimens
 
 @Composable
 fun CharacterDetailsScreen(characterId: Int) {
@@ -47,7 +48,7 @@ fun CharacterDetailsScreen(characterId: Int) {
             error != null -> {
                 Text(
                     text = error ?: "Unknown error",
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(Dimens.mediumSpacing)
                 )
             }
 
@@ -63,7 +64,7 @@ fun CharacterDetailsScreen(characterId: Int) {
 
 
 @Composable
-private fun CharacterContent(
+fun CharacterContent(
     character: CharacterInfo,
     modifier: Modifier = Modifier
 ) {
@@ -71,7 +72,7 @@ private fun CharacterContent(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(16.dp)
+            .padding(Dimens.mediumSpacing)
     ) {
 
         AsyncImage(
@@ -79,11 +80,11 @@ private fun CharacterContent(
             contentDescription = character.name,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(280.dp),
+                .height(Dimens.infoPosterImageSize),
             contentScale = ContentScale.Crop
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Dimens.heightSpacing))
 
         Text(
             text = character.name,
@@ -98,14 +99,14 @@ private fun CharacterContent(
         }
 
         if (character.nicknames.isNotEmpty()) {
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.heightSpacing))
             Text(
                 text = "Nicknames: ${character.nicknames.joinToString()}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimens.heightSpacing))
 
         character.about?.let {
             Text(

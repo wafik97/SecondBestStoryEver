@@ -1,6 +1,7 @@
 package com.example.secondbeststoryever.ui.screens.characters
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,11 +30,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.R
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.secondbeststoryever.data.model.Character
 import com.example.secondbeststoryever.data.remote.RetrofitInstance
+import com.example.secondbeststoryever.ui.theme.Gray
 import com.example.secondbeststoryever.ui.theme.SecondBestStoryEverTheme
+import com.example.secondbeststoryever.ui.theme.Dimens
 
 
 
@@ -58,7 +63,7 @@ fun CharactersScreen(
             Text(
                 text = "Population of the Manga",
                 style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(Dimens.screenPadding)
             )
 
             OutlinedTextField(
@@ -66,7 +71,7 @@ fun CharactersScreen(
                 onValueChange = { viewModel.searchQuery.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = Dimens.screenPadding),
                 placeholder = { Text("Search character...") },
                 singleLine = true
             )
@@ -74,8 +79,8 @@ fun CharactersScreen(
             Text(
                 text = if (viewModel.isGrid.value) "Grid View" else "List View",
                 modifier = Modifier
-                    .padding(16.dp)
-                    .align(Alignment.End)
+                    .padding(Dimens.screenPadding)
+                    .align(Alignment.Start)
                     .clickable { viewModel.toggleLayout() },
                 style = MaterialTheme.typography.labelLarge
             )
@@ -87,7 +92,7 @@ fun CharactersScreen(
                     columns = GridCells.Fixed(2),
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+                        .padding(Dimens.screenPadding)
                 ) {
                     items(characters) { character ->
                         CharacterGridItem(character) {
@@ -99,7 +104,7 @@ fun CharactersScreen(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+                        .padding(Dimens.mediumSpacing)
                 ) {
                     items(characters) { character ->
                         CharacterListItem(character) {
@@ -145,22 +150,29 @@ fun CharacterListItem(
 ) {
     Card(
         modifier = Modifier
+            .padding(vertical = Dimens.listItemPadding)
             .fillMaxWidth()
-            .height(96.dp)
-            .clickable { onClick() }
+            .height(Dimens.listItemHeight)
+            .clickable { onClick() },
+
+
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(8.dp)
+
+
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(Dimens.listItemPadding),
+                    verticalAlignment = Alignment.CenterVertically,
         ) {
             AsyncImage(
                 model = character.imageUrl,
                 contentDescription = character.name,
-                modifier = Modifier.size(64.dp),
+                modifier = Modifier.size(Dimens.listImageSize),
                 contentScale = ContentScale.Crop
             )
 
-            Column(modifier = Modifier.padding(start = 12.dp)) {
+            Column(modifier = Modifier.padding(start = Dimens.listTextSpacing)) {
                 Text(
                     text = character.name,
                     style = MaterialTheme.typography.titleMedium
@@ -182,8 +194,9 @@ fun CharacterGridItem(
 ) {
     Card(
         modifier = Modifier
+            .padding(Dimens.gridItemPadding)
             .fillMaxWidth()
-            .height(180.dp)
+            .height(Dimens.gridItemHeight)
             .clickable { onClick() }
     ) {
         Column(
@@ -194,12 +207,12 @@ fun CharacterGridItem(
                 contentDescription = character.name,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(120.dp),
+                    .height(Dimens.gridImageHeight),
                 contentScale = ContentScale.Crop
             )
             Text(
                 text = character.name,
-                modifier = Modifier.padding(8.dp),
+                Modifier.padding(Dimens.gridItemPadding),
                 style = MaterialTheme.typography.bodyMedium
             )
         }
@@ -212,7 +225,8 @@ fun CharacterGridItem(
 @Composable
 fun GreetingPreview() {
     SecondBestStoryEverTheme {
-        //CharactersScreen(navController,)
+        val navController = rememberNavController()
+        CharactersScreen(navController)
     }
 }
 

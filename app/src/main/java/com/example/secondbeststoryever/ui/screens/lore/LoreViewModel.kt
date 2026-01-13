@@ -14,7 +14,7 @@ class LoreViewModel : ViewModel() {
     val isLoading = mutableStateOf(false)
 
     fun loadLore(mangaId: Int) {
-        viewModelScope.launch {   // check this pls
+        viewModelScope.launch {   // check this pls or i will forget
             isLoading.value = true
             try {
                 lore.value = RetrofitInstance.api
