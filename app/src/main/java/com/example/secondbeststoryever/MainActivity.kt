@@ -88,7 +88,7 @@ fun Home(navController: NavController){
         ) {
 
             Text(
-                text = "Reject Ranger",
+                text = stringResource(R.string.title),
                 fontSize = Dimens.titleFontSize,
                 fontWeight = FontWeight.Bold
             )
