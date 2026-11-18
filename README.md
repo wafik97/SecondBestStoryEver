@@ -6,7 +6,7 @@
 
 ## Features 
 
-### Manga & Characters
+### Manga & Characters  
 - View detailed information about the manga including **title, synopsis, background**, and **authors**.
 - Browse a list or grid of characters with:
   - **Name**   
