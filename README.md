@@ -1,4 +1,4 @@
-# Second Best Story Ever – Android App
+# Second Best Story Ever – Android App   
 
 **Second Best Story Ever** is an Android application built with **Jetpack Compose** that showcases a manga titled *Reject Ranger*. The app fetches manga information, characters, pictures, and real-time user locations using **Retrofit**, **WebSockets**, and publicly available APIs. It provides an interactive UI for browsing manga content, exploring characters, viewing lore, and connecting with other users in real-time on a map.
 
@@ -9,7 +9,7 @@
 ### Manga & Characters
 - View detailed information about the manga including **title, synopsis, background**, and **authors**.
 - Browse a list or grid of characters with:
-  - **Name**
+  - **Name**   
   - **Role**
   - **Nicknames**
   - **Profile images**
