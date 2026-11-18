@@ -4,7 +4,7 @@
 
 ---
 
-## Features
+## Features 
 
 ### Manga & Characters
 - View detailed information about the manga including **title, synopsis, background**, and **authors**.
