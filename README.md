@@ -9,10 +9,10 @@
 ### Manga & Characters  
 - View detailed information about the manga including **title, synopsis, background**, and **authors**.
 - Browse a list or grid of characters with:
-  - **Name**   
+  - **Name**     
   - **Role**
   - **Nicknames**
-  - **Profile images**
+  - **Profile Images**
 - Search functionality for filtering characters by name.
 - Detailed character view with images, Kanji names, and descriptions.
 
