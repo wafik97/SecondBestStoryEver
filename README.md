@@ -21,7 +21,7 @@
 
 ### Map & Real-time Users
 - Connect to a WebSocket server to share your **location** with other users.
-- Track your **latitude and longitude** in real-time.
+- Track your **latitude and longitude** in real-time. 
 - View other connected users’ locations.
 
 ### Navigation
