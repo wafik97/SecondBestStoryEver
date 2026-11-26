@@ -13,7 +13,7 @@
   - **Role**
   - **Nicknames**
   - **Profile images**
-- Search functionality for filtering characters by name.
+- Search functionality for filtering characters by name. 
 - Detailed character view with images, Kanji names, and descriptions.
 
 ### Pictures
