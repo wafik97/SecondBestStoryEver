@@ -12,7 +12,7 @@
   - **Name**     
   - **Role**
   - **Nicknames**
-  - **Profile Images**
+  - **Profile images**
 - Search functionality for filtering characters by name.
 - Detailed character view with images, Kanji names, and descriptions.
 
